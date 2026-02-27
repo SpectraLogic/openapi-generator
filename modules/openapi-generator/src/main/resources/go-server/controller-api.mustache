@@ -452,7 +452,7 @@ func (c *{{classname}}Controller) {{nickname}}(w http.ResponseWriter, r *http.Re
 		return
 	}
 	{{^isEnumRef}}
-	{{paramName}}Param := query.Get("{{baseName}}")
+	{{paramName}}Param := getPointer(query.Get("{{baseName}}"))
 	{{/isEnumRef}}
 	{{#isEnumRef}}
 	{{paramName}}Param, err := New{{dataType}}FromValue(query.Get("{{baseName}}"))

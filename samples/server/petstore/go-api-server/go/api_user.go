@@ -231,12 +231,12 @@ func (c *UserAPIController) LoginUser(w http.ResponseWriter, r *http.Request) {
 		c.errorHandler(w, r, &RequiredError{"username"}, nil)
 		return
 	}
-	usernameParam := query.Get("username")
+	usernameParam := getPointer(query.Get("username"))
 	if !query.Has("password"){
 		c.errorHandler(w, r, &RequiredError{"password"}, nil)
 		return
 	}
-	passwordParam := query.Get("password")
+	passwordParam := getPointer(query.Get("password"))
 	rememberMeParam, err := parseBoolParameter(
 		query.Get("remember_me"),
 		WithParse[bool](parseBool),
