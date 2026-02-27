@@ -20,6 +20,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 )
@@ -78,7 +79,7 @@ func EncodeJSONResponse(i interface{}, status *int, headers map[string][]string,
 			return err
 		}
 		wHeader.Set("Content-Type", http.DetectContentType(data))
-		wHeader.Set("Content-Disposition", "attachment; filename="+f.Name())
+		wHeader.Set("Content-Disposition", "attachment; filename="+filepath.Base(f.Name()))
 		if status != nil {
 			w.WriteHeader(*status)
 		} else {
@@ -314,9 +315,6 @@ func parseNumericParameter[T Number](param string, fn Operation[T], checks ...Co
 
 // parseBoolParameter parses a string parameter to a bool
 func parseBoolParameter(param string, fn Operation[bool]) (*bool, error) {
-	if param == "" {
-		return nil, nil
-	}
 	v, _, err := fn(param)
 	return v, err
 }
