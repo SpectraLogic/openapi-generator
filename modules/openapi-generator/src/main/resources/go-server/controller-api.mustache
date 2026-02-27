@@ -424,9 +424,9 @@ func (c *{{classname}}Controller) {{nickname}}(w http.ResponseWriter, r *http.Re
 	{{^isArray}}
 	{{^isDateTime}}
 	{{#defaultValue}}
-	{{paramName}}Param := "{{defaultValue}}"
+	{{paramName}}Param := getPointer("{{defaultValue}}")
 	if query.Has("{{baseName}}") {
-		{{paramName}}Param = {{^isString}}{{dataType}}( {{/isString}}query.Get("{{baseName}}"){{^isString}} ){{/isString}}
+		{{paramName}}Param = getPointer(query.Get("{{baseName}}"))
 	}
 	{{/defaultValue}}
 	{{^defaultValue}}

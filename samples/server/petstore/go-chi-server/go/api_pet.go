@@ -253,9 +253,9 @@ func (c *PetAPIController) FindPetsByStatus(w http.ResponseWriter, r *http.Reque
 		c.errorHandler(w, r, &ParsingError{Param: "defaultNum", Err: err}, nil)
 		return
 	}
-	defaultStrParam := "default"
+	defaultStrParam := getPointer("default")
 	if query.Has("defaultStr") {
-		defaultStrParam = query.Get("defaultStr")
+		defaultStrParam = getPointer(query.Get("defaultStr"))
 	}
 	result, err := c.service.FindPetsByStatus(r.Context(), statusParam, inlineEnumPathParam, inlineEnumParam, defaultIntParam, defaultNumParam, defaultStrParam)
 	// If an error occurred, encode the error with the status code
