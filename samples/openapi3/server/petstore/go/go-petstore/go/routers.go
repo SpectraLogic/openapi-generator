@@ -21,6 +21,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 )
@@ -74,7 +75,7 @@ func EncodeJSONResponse(i interface{}, status *int, headers map[string][]string,
 			return err
 		}
 		wHeader.Set("Content-Type", http.DetectContentType(data))
-		wHeader.Set("Content-Disposition", "attachment; filename="+f.Name())
+		wHeader.Set("Content-Disposition", "attachment; filename="+filepath.Base(f.Name()))
 		if status != nil {
 			w.WriteHeader(*status)
 		} else {
