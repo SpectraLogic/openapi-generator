@@ -343,9 +343,6 @@ func parseNumericParameter[T Number](param string, fn Operation[T], checks ...Co
 
 // parseBoolParameter parses a string parameter to a bool
 func parseBoolParameter(param string, fn Operation[bool]) (*bool, error) {
-	if param == "" {
-		return nil, nil
-	}
 	v, _, err := fn(param)
 	return v, err
 }
